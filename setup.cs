@@ -94,7 +94,7 @@ namespace IntelReader
                 }
 
             }
-            Console.WriteLine($"target: {config.target}");
+            Console.WriteLine($"target: {config.target}  {DateTime.Now}");
 
         }
         public static void setData(string[] data)
