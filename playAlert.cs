@@ -10,14 +10,29 @@ namespace IntelReader
 
         public static void playAlert(string n)
         {
+
             if (n == "0")
                 return;
-
-            string fn = Directory.GetCurrentDirectory() + $@"\sounds\{n}.wav";
+            string OSV = System.Environment.OSVersion.ToString();
+            string fn;
+            if (n == "1")
+            {
+                fn = Directory.GetCurrentDirectory() + $@"\sounds\{n}.wav";
+            }
+            else
+            {
+                fn = Directory.GetCurrentDirectory() + $@"\sounds\neuts{n}jump.mp3";
+            }
             if (File.Exists(fn))
             {
                 // TODO  change this for other platforms
-                System.Diagnostics.Process.Start(@"powershell", $@"-c (New-Object Media.SoundPlayer '{fn}').PlaySync();");
+                if (OSV.Contains("Windows")){
+                    System.Diagnostics.Process.Start(@"powershell", $@"-c (New-Object Media.SoundPlayer '{fn}').PlaySync();");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(@"audio", "." + fn);
+                }
             }
 
             //var waveFileReader = new WaveFileReader(Directory.GetCurrentDirectory() + $@"\sounds\{n}.wav");
