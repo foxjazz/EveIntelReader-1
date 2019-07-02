@@ -8,6 +8,13 @@ namespace IntelReader
 {
     public static class Utils
     {
+        public static string CleanString(string this, string input)
+        {
+            var replacements = new[] { "@", "*", """, "&", "^", "%", "$", "#", "!", "=", "(", ")", "[", "]", "{", "}" }; 
+            var output = new StringBuilder(input); 
+            foreach (var r in replacements) output.Replace(r, string.Empty);
+            return output;
+        }
         public static string GetFilePrefix(string fq)
         {
             int first, len;
