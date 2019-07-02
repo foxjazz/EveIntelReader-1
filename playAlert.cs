@@ -31,7 +31,7 @@ namespace IntelReader
                 }
                 else
                 {
-                    System.Diagnostics.Process.Start(@"audio", "." + fn);
+                    System.Diagnostics.Process.Start(@"audioplay", "." + fn);
                 }
             }
 
