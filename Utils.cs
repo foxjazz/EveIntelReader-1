@@ -10,7 +10,7 @@ namespace IntelReader
     {
         public static string CleanString(this string input)
         {
-            var replacements = new[] { "@", "*", """, "&", "^", "%", "$", "#", "!", "=", "(", ")", "[", "]", "{", "}" }; 
+            var replacements = new[] { "@", "*", "\"", "&", "^", "%", "$", "#", "!", "=", "(", ")", "[", "]", "{", "}" }; 
             var output = new StringBuilder(input); 
             foreach (var r in replacements) output.Replace(r, string.Empty);
             return output;
