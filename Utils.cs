@@ -8,7 +8,7 @@ namespace IntelReader
 {
     public static class Utils
     {
-        public static string CleanString(this input)
+        public static string CleanString(this string input)
         {
             var replacements = new[] { "@", "*", """, "&", "^", "%", "$", "#", "!", "=", "(", ")", "[", "]", "{", "}" }; 
             var output = new StringBuilder(input); 
