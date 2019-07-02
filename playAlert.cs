@@ -15,7 +15,7 @@ namespace IntelReader
                 return;
             string OSV = System.Environment.OSVersion.ToString();
             string fn;
-            if (n == "1")
+            if (n != "1")
             {
                 fn = Directory.GetCurrentDirectory() + $@"\sounds\{n}.wav";
             }

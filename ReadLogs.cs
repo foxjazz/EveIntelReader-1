@@ -44,7 +44,7 @@ namespace IntelReader
                 var logFileInfo = new List<LogFileInfo>();
                 foreach (var fi in datafiles)
                 {
-                    if (fi.Name.ToLower().StartsWith("int") && fi.LastWriteTimeUtc >= from_date)
+                    if (fi.Name.ToLower().Contains("intel") && fi.LastWriteTimeUtc >= from_date)
                     {
 
                         fileInfos.Add(fi);
