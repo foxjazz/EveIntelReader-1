@@ -102,7 +102,7 @@ namespace IntelReader
                     linenumber = last.lineNumber;
                     while (sr.Peek() >= 0)
                     {
-                        string line = sr.ReadLine();
+                        string line = sr.ReadLine().CleanString();
                         var data = line.Split(' ');
                         linenumber++;
                         last.lineNumber = linenumber;
