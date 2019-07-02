@@ -13,7 +13,7 @@ namespace IntelReader
             var replacements = new[] { "@", "*", "\"", "&", "^", "%", "$", "#", "!", "=", "(", ")", "[", "]", "{", "}" }; 
             var output = new StringBuilder(input); 
             foreach (var r in replacements) output.Replace(r, string.Empty);
-            return output;
+            return output.ToString();
         }
         public static string GetFilePrefix(string fq)
         {
