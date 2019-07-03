@@ -1,5 +1,5 @@
 
-//using NAudio.Wave;
+using System;
 using System.IO;
 
 namespace IntelReader
@@ -14,19 +14,21 @@ namespace IntelReader
             if (n == "0")
                 return;
             string OSV = System.Environment.OSVersion.ToString();
-            string fn;
+            string fn = "";
             if (n != "1")
             {
                 fn = Directory.GetCurrentDirectory() + $@"\sounds\{n}.wav";
             }
-            else
+            if (n == "1")
             {
-                fn = Directory.GetCurrentDirectory() + $@"\sounds\neuts{n}jump.mp3";
+                fn = Directory.GetCurrentDirectory() + $@"\sounds\neuts1jump.wav";
             }
+
             if (File.Exists(fn))
             {
                 // TODO  change this for other platforms
                 if (OSV.Contains("Windows")){
+                    Console.WriteLine($"Playing audio: {fn}");
                     System.Diagnostics.Process.Start(@"powershell", $@"-c (New-Object Media.SoundPlayer '{fn}').PlaySync();");
                 }
                 else
