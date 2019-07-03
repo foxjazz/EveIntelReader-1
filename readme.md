@@ -25,6 +25,12 @@ Then type "dotnet run" "The folderapp.dll"
 i.e. dotnet run G:\EveAlerts\EveIntelReader\bin\Debug\netcoreapp3.0\EveIntelReader.dll
 
 
+Contributing:
+currently this is configed for 75C position. And this could use some database work to add more systems and longer alert range. I think 9 jumps would be sufficient to cover, but for me 6 is perfect.
+Update the database, create a Pull request from your own repo. I will verify the database.
+
+Consider suggesting features.
+
 
 
 
