@@ -1,8 +1,33 @@
 Eveonline console app which reads logs, this is started because other systems are not open sourced.
 Foxjazz will guide and manage updates to this project
 
-Use this for replacing bad characters
-var replacements = new[] { "@", "*", "\"", "&", "^", "%", "$", "#", "!", "=", "(", ")", "[", "]", "{", "}" };
-var output = new StringBuilder(Input);
-foreach (var r in replacements)
-    output.Replace(r, string.Empty);
+
+To Install and configurer.
+
+First download/install [code](https://code.visualstudio.com/docs?dv=win&wt.mc_id=DX_841432&sku=codewin)
+
+Add terminal in code or open a console to (clone)[https://help.github.com/en/articles/cloning-a-repository] the project.
+
+This may mean installing yet another tool called git along with gitbash.
+
+(Download)[https://dotnet.microsoft.com/download/dotnet-core/3.0] dotnet core 3.0 or 2.2 if you don't want 3
+
+Config:
+Open config.txt and place the eve logs Folder in there:
+chatFolder, "C:\Users\YourUserName\Documents\EVE\logs"
+
+If someone wants to modify to find and serach for eve chatlogs then please help.
+
+Now open code, then open the folder the project is cloned at.
+From command line type  dotnet build
+you will see the output built and folder.
+Then type "dotnet run" "The folderapp.dll" 
+i.e. dotnet run G:\EveAlerts\EveIntelReader\bin\Debug\netcoreapp3.0\EveIntelReader.dll
+
+
+
+
+
+
+
+
