@@ -1,2 +1,3 @@
 chatFolder, "C:\Users\fox21\Documents\EVE\logs"
 targetSystem, "75C-WN"
+LogFiles, Intel, U42, Immensea

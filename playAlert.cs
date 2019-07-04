@@ -8,6 +8,7 @@ namespace IntelReader
     {
         
 
+
         public static void playAlert(string n)
         {
 
@@ -22,6 +23,11 @@ namespace IntelReader
             if (n == "1")
             {
                 fn = Directory.GetCurrentDirectory() + $@"\sounds\neuts1jump.wav";
+            }
+            foreach(string fsys in setup.named){
+                if(fsys == n){
+                    fn = Directory.GetCurrentDirectory() + $@"\sounds\{fsys}.wav";
+                }
             }
 
             if (File.Exists(fn))

@@ -8,5 +8,6 @@ namespace IntelReader
     {
         public static string target;
         public static string baseEveFolder;
+        public static string[] logFileNames;
     }
 }

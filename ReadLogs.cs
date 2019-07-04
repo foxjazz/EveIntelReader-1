@@ -9,7 +9,6 @@ namespace IntelReader
 {
     static class ReadLogs
     {
-        public static string[] names;
         public static List<string> fileList;
         public static int fileNumber = 0;
         public static void readAndCheckNames()
@@ -44,7 +43,7 @@ namespace IntelReader
                 var logFileInfo = new List<LogFileInfo>();
                 foreach (var fi in datafiles)
                 {
-                    if (fi.Name.ToLower().Contains("intel") && fi.LastWriteTimeUtc >= from_date)
+                    if (Utils.HasInFileName(fi.Name, config.logFileNames) && fi.LastWriteTimeUtc >= from_date)
                     {
 
                         fileInfos.Add(fi);
@@ -153,6 +152,12 @@ namespace IntelReader
                 if(jn.system == log)
                 {
                     PlaySound.playAlert(jn.jumps.Trim());
+                    foreach(string fsys in setup.named){
+                        if(fsys == jn.system){
+                            PlaySound.playAlert(fsys);
+                        }
+                    }
+                    
                     Console.WriteLine($"CL: {fn} : {jn.system} which is {jn.jumps} away.");
                 }
             }

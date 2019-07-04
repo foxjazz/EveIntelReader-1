@@ -9,14 +9,16 @@ namespace IntelReader
     public static class setup
     {
         public static JumpData jumpData;
+        public static string[] named;
+        public static string[] logNames;
         public static void ImportData(string[] args)
 
         {
             using (StreamReader sr = new StreamReader(@"config\config.txt"))
             {
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    string[] data = sr.ReadLine().Split(',');
+                    string[] data = sr.ReadLine().Replace(" ","").Split(',');
                     setData(data);
                 }
 
@@ -26,7 +28,7 @@ namespace IntelReader
             using (StreamReader sr = new StreamReader("db/data.csv"))
             {
 
-                string[] data = sr.ReadLine().Split(',');
+                string[] data = sr.ReadLine().Replace(" ","").Split(',');
                 bool onTarget = false;
                 if (data[0] == "target" && data[1].Replace("\"", "") == config.target)
                 {
@@ -46,10 +48,10 @@ namespace IntelReader
                             break;
 
                         var jn = new JumpNumber();
-                        jn.system = data[0].Replace("\"", "");
+                        jn.system = data[0].Replace("\"", "").Trim();
                         if (data.Length > 1)
                         {
-                            jn.jumps = data[1];
+                            jn.jumps = data[1].Trim();
                             jumpData.jumpNumber.Add(jn);
                         }
                     }
@@ -61,6 +63,10 @@ namespace IntelReader
 
             }
 
+            using (StreamReader sr = new StreamReader("db/named.csv"))
+            {
+                named = sr.ReadLine().Split(',');
+            }
             using (StreamReader sr = new StreamReader("db/special.csv"))
             {
 
@@ -103,6 +109,9 @@ namespace IntelReader
                 config.baseEveFolder = data[1].Replace("\"", ""); ;
             if (data[0] == "targetSystem")
                 config.target = data[1].Replace("\"", "");
+            if (data[0] == "LogFiles")
+                config.logFileNames = data;
+
         }
 
     }
