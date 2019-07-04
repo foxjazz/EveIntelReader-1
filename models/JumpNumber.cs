@@ -33,4 +33,5 @@ namespace IntelReader.models
         public List<string> ChatFiles { get; set; }
 
     }
+   
 }
