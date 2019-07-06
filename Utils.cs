@@ -10,7 +10,7 @@ namespace IntelReader
     {
         public static bool HasInFileName(string fn, string[] names){
             foreach( string n in names){
-                if(fn.Contains(n))
+                if(fn.Contains(n.ToLower()))
                 return true;;
             }
             return false;

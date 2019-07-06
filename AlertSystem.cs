@@ -13,7 +13,7 @@ namespace IntelReader
             while (true)
             {
                
-                ReadLogs.readAndCheckNames();
+                ReadLogs.ReadAndCheckNames();
                 // Console.WriteLine($"1 second loop {DateTime.Now}");
                 Thread.Sleep(3000);
             }
