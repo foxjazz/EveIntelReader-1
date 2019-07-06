@@ -70,15 +70,15 @@ namespace IntelReader
 
             //Initial read, then next read.
             if (lastRead == null)
+            {
+                lastRead = new List<LastRead>();
+                runTimes = 0;
+                Console.WriteLine($"Monitoring:");
+                foreach (string fn in fileList)
                 {
-                    lastRead = new List<LastRead>();
-                    runTimes = 0;
-                    Console.WriteLine($"Monitoring:");
-                    foreach (string fn in fileList)
-                    {
-                        Console.WriteLine($"file: {fn} ");
-                    }
+                    Console.WriteLine($"file: {fn} ");
                 }
+            }
             int linenumber = 0;
             string filename;
             LastRead last;

@@ -7,13 +7,21 @@ namespace IntelReader
     public static class PlaySound
     {
         
-
+        public static DateTime LastPlayed;
 
         public static void playAlert(string n)
         {
 
             if (n == "0")
                 return;
+            // only play something if a second has passted since laste message
+            if(LastPlayed == null)
+                LastPlayed = DateTime.Now.AddSeconds(-1);
+            if(LastPlayed < DateTime.Now)
+                return;
+            LastPlayed = DateTime.Now;
+
+
             string OSV = System.Environment.OSVersion.ToString();
             string fn = "";
             if (n != "1")
