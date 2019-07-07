@@ -1,13 +1,13 @@
  dotnet build -c Release
  dotnet publish -c Release --framework netcoreapp3.0
  # publish
- copy .\sounds\*.* .\bin\Release\netcoreapp3.0\publish\sounds
- copy .\db\*.* .\bin\Release\netcoreapp3.0\publish\db
- copy .\config\*.* .\bin\Release\netcoreapp3.0\publish\config
+ cp ./sounds/*.wav ./bin/Release/netcoreapp3.0/publish/sounds
+ cp ./db/*.csv ./bin/Release/netcoreapp3.0/publish/db
+ cp ./config/*.txt ./bin/Release/netcoreapp3.0/publish/config
  # release
- copy .\sounds\*.* .\bin\Release\sounds
- copy .\db\*.* .\bin\Release\db
- copy .\config\*.* .\bin\Release\config
+ cp ./sounds/*.wav ./bin/Release/netcoreapp3.0/sounds
+ cp ./db/*.csv ./bin/Release/netcoreapp3.0/db
+ cp ./config/*.txt ./bin/Release/netcoreapp3.0/config
 
 
  rm EveAlert.zip

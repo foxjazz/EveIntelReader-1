@@ -5,12 +5,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace IntelReader
 {
     public static class Read
     {
-        public static void ReadLog(FileChanged fc)
+        public static void ReadLog( FileChanged fc)
         {
             var fn = fc.FoundFile;
                 var fs = new FileStream(fn, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
@@ -35,7 +36,7 @@ namespace IntelReader
                                 IEnumerable<string> data6 = data.Where(a => a.Length == 6);
                                 foreach (string d in data6)
                                 {
-                                        Check.checkSystems(d, fn);
+                                        Check.checkSystems(d, fn, fc.Prefix);
                                 }
                             }
 
@@ -43,6 +44,7 @@ namespace IntelReader
                     
                 }
                 fs.Dispose();
+                //return Task.CompletedTask;
             }
             public static void Skip(StreamReader rd, int skip)
             {

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 
 
@@ -99,10 +100,13 @@ namespace IntelReader
                         if(lfi.firstCheck && lfi.lines != currentLineCount){
                             // TODO activate event
                             Debug.WriteLine($"file changed: {lfi.name}");
-                            var fc = new FileChanged(lfi.fullName, lfi.lines);
+                            var fc = new FileChanged(lfi.fullName, lfi.lines, lfi.prefix);
                             Debug.WriteLine($"Reading: {lfi.name} lines: {lfi.lines}  newlines{currentLineCount - lfi.lines}  fullName: {lfi.fullName}");
                             lfi.lines = currentLineCount;
-                            Read.ReadLog(fc);
+                            
+                            //await.Task.Run(Read.ReadLog(fc));
+                            // Read.ReadLog(fc);
+                            OnFileChanged(fc);
                             
                         }
                         lfi.lines = currentLineCount;

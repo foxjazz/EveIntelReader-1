@@ -10,7 +10,7 @@ namespace IntelReader
 {
     public static class Check
     {
-        public static void checkSystems(string d, string fn)
+        public static void checkSystems(string d, string fn, string prefix)
         {
             string fn1 = fn;
             bool hasNamed;
@@ -36,7 +36,7 @@ namespace IntelReader
                         PlaySound.playAlert(jn.jumps.Trim());
                     }
                     
-                    Console.WriteLine($"CL: {fn} : {jn.system} which is {jn.jumps} away.");
+                    Console.WriteLine($"CL: {prefix} : {jn.system} which is {jn.jumps} away.");
                 }
             }
 
