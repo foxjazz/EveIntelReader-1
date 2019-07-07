@@ -33,9 +33,7 @@ namespace IntelReader
                 {
                     if (Utils.HasInFileName(fi.Name.ToLower(), config.logFileNames) && fi.LastWriteTimeUtc >= fromDate)
                     {
-                       
-                        
-                        AddFile(fi.FullName, fi.LastWriteTimeUtc, GetSuffix(fi.FullName));
+                        AddFile(fi.FullName, fi.LastWriteTimeUtc, GetSuffix(fi.FullName), fi.CreationTimeUtc);
                     }
                 }
 
@@ -43,7 +41,7 @@ namespace IntelReader
         public void Off(){
             threadMonitor = false;
         }
-        public void AddFile(string fn, DateTime lastWrite, Int32 suffix){
+        public void AddFile(string fn, DateTime lastWrite, Int32 suffix, DateTime createdTimeUtc){
             if(dir == null){
                 dir = new DirectoryInfo(startPath);
                 if(!threadMonitor){
@@ -53,19 +51,12 @@ namespace IntelReader
             }
             var exists = monitorFiles.Exists(a => a.fullName == fn);
             if(!exists){
-/*
-                if (monitorFiles.Exists(a => a.lastWrite < lastWrite && a.name == GetFilePrefix(fn) && a.suffix < suffix))
+                if (monitorFiles.Exists(a => a.name == GetFilePrefix(fn) && a.Created < createdTimeUtc && a.suffix < suffix))
                 {
-                    var j = monitorFiles.FirstOrDefault(a => a.lastWrite < lastWrite && a.name == GetFilePrefix(fn) && a.suffix < suffix);
+                    var j = monitorFiles.FirstOrDefault(a =>   a.name == GetFilePrefix(fn) && a.Created < createdTimeUtc && a.suffix < suffix);
                     monitorFiles.Remove(j);
                 }
-*/
-                if (monitorFiles.Exists(a => a.name == GetFilePrefix(fn) && a.suffix < suffix))
-                {
-                    var j = monitorFiles.FirstOrDefault(a =>   a.name == GetFilePrefix(fn) && a.suffix < suffix);
-                    monitorFiles.Remove(j);
-                }
-                monitorFiles.Add(new LogFileInfo(){lastWrite = lastWrite, fullName = fn, name=GetFilePrefix(fn), firstCheck = false, lines=0, suffix = suffix});
+                monitorFiles.Add(new LogFileInfo(){lastWrite = lastWrite, fullName = fn, name=GetFilePrefix(fn), firstCheck = false, lines=0, suffix = suffix, Created = createdTimeUtc});
             }
         }
         
@@ -144,6 +135,55 @@ namespace IntelReader
             len = fq.Substring(first).IndexOf("_");
             string rtn = fq.Substring(first, len);
             return rtn;
+        }
+
+        public void CheckChangedLogPool()
+        {
+            var candidatFiles = new List<LogFileInfo>();
+            var directory = new DirectoryInfo(startPath);
+            DateTime fromDate = DateTime.UtcNow.AddHours(-24);
+            var datafiles = directory.GetFiles();
+            var logFileInfo = new List<LogFileInfo>();
+            foreach (var fi in datafiles)
+            {
+                if (Utils.HasInFileName(fi.Name.ToLower(), config.logFileNames) && fi.LastWriteTimeUtc >= fromDate)
+                {
+                    //.FullName, fi.LastWriteTimeUtc, GetSuffix(fi.FullName));
+                    candidatFiles.Add( new LogFileInfo(){fullName = fi.FullName, lastWrite = fi.LastWriteTimeUtc, suffix = GetSuffix(fi.FullName), Created = fi.CreationTimeUtc});
+                }
+                var exists = candidatFiles.Exists(a => a.fullName == fi.FullName);
+                if(!exists){
+                    if (candidatFiles.Exists(a => a.name == GetFilePrefix(fi.FullName) && a.Created < fi.CreationTimeUtc && a.suffix < GetSuffix(fi.FullName)))
+                    {
+                        var j = monitorFiles.FirstOrDefault(a =>   a.name == GetFilePrefix(fi.FullName) && a.Created < fi.CreationTimeUtc && a.suffix < GetSuffix(fi.FullName));
+                        candidatFiles.Remove(j);
+                    }
+                    candidatFiles.Add(new LogFileInfo(){lastWrite = fi.LastWriteTimeUtc, fullName = fi.FullName, name=GetFilePrefix(fi.FullName), firstCheck = false, lines=0, suffix = GetSuffix(fi.FullName), Created = fi.CreationTimeUtc});
+                }
+            }
+
+            foreach (var can in candidatFiles)
+            {
+                CheckCandidate(can);
+            }
+
+        }
+
+        private void CheckCandidate(LogFileInfo lfi)
+        {
+            LogFileInfo dmon = null;
+            foreach (var mon in monitorFiles)
+            {
+                if (lfi.fullName != mon.fullName)
+                {
+                    dmon = mon;
+                    monitorFiles.Add(lfi);
+                }
+
+                break;
+            }
+            if(dmon != null)
+                monitorFiles.Remove(dmon);
         }
     }
 }
