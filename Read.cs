@@ -22,7 +22,7 @@ namespace IntelReader
                     {
                         string line = sr.ReadLine().CleanString();
                         var data = line.Split(' ');
-                            Console.WriteLine($"Log: {fn} comment: {line}");
+                            Console.WriteLine($"{fc.Prefix} :: {line}");
                             bool clr = false;
                             foreach (string d in data)
                             {

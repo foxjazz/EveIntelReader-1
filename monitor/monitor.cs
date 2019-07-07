@@ -142,7 +142,8 @@ namespace IntelReader
             first = fq.LastIndexOf("\\");
             first++;
             len = fq.Substring(first).IndexOf("_");
-            return fq.Substring(first, len);
+            string rtn = fq.Substring(first, len);
+            return rtn;
         }
     }
 }

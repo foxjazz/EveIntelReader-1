@@ -36,7 +36,8 @@ namespace IntelReader
                         PlaySound.playAlert(jn.jumps.Trim());
                     }
                     
-                    Console.WriteLine($"CL: {prefix} : {jn.system} which is {jn.jumps} away.");
+                    Console.WriteLine($"CL: {prefix} : {jn.system}");
+                    Debug.WriteLine($"CL: {prefix} : {jn.system} ");
                 }
             }
 
@@ -46,7 +47,7 @@ namespace IntelReader
                 if (jn.system == log)
                 {
                     PlaySound.playAlert(jn.jumps);
-                    Console.WriteLine($"CL: {fn} : {jn.system} which is {jn.jumps} away.");
+                    Console.WriteLine($"CL: {prefix} : {jn.system} which is {jn.jumps} away.");
                 }
             }
         }
