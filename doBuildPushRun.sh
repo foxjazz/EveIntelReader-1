@@ -16,3 +16,4 @@
 # git push origin master
 dotnet run .\bin\Release\netcoreapp3.0\EveIntelReader.dll
 
+q

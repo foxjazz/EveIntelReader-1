@@ -15,7 +15,7 @@ namespace IntelReader
                
                 ReadLogs.ReadAndCheckNames();
                 // Console.WriteLine($"1 second loop {DateTime.Now}");
-                Thread.Sleep(3000);
+                Thread.Sleep(300);
             }
 
 
