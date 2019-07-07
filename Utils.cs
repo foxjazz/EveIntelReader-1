@@ -2,15 +2,18 @@
 using IntelReader.models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Linq;
+
+
 namespace IntelReader
 {
     public static class Utils
     {
         public static bool HasInFileName(string fn, string[] names){
             foreach( string n in names){
-                if(fn.Contains(n))
+                if(fn.Contains(n.ToLower()))
                 return true;;
             }
             return false;
@@ -70,6 +73,12 @@ namespace IntelReader
             }
             return false;
 
+        }
+        public static long ReadLineCount(this StreamReader stream)
+        {
+            long cnt = 0;
+            while (stream.ReadLine() != null) cnt++;
+            return cnt;
         }
     }
 }

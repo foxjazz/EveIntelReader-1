@@ -10,17 +10,8 @@ namespace IntelReader
         {
             setup.ImportData(args);
             Console.WriteLine($" Started: {DateTime.Now}");
-            while (true)
-            {
-               
-                ReadLogs.readAndCheckNames();
+            ReadLogs.ReadAndCheckNames();
                 // Console.WriteLine($"1 second loop {DateTime.Now}");
-                Thread.Sleep(3000);
-            }
-
-
-
-
         }
     }
-}
+} 

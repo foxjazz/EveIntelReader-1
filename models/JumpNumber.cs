@@ -15,16 +15,15 @@ namespace IntelReader.models
         public string system;
         public string jumps;
     }
-    public class LastRead
-    {
-        public string fileName;
-        public int lineNumber;
-    }
+  
     public class LogFileInfo
     {
+        public long lines;
+        public bool firstCheck;
         public string fullName;
         public string name;
         public string prefix;
+        public Int32 suffix;
         public DateTime Created;
         public DateTime lastWrite;
     }
