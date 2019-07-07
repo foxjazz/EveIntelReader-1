@@ -35,8 +35,6 @@ namespace IntelReader
                     if(!hasNamed){
                         PlaySound.playAlert(jn.jumps.Trim());
                     }
-                    
-                    Console.WriteLine($"CL: {prefix} : {jn.system}");
                     Debug.WriteLine($"CL: {prefix} : {jn.system} ");
                 }
             }

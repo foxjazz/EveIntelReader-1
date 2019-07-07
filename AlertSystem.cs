@@ -14,4 +14,4 @@ namespace IntelReader
                 // Console.WriteLine($"1 second loop {DateTime.Now}");
         }
     }
-}
+} 
