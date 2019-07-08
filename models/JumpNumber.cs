@@ -18,6 +18,7 @@ namespace IntelReader.models
   
     public class LogFileInfo
     {
+        public Int32 fileDate;
         public long lines;
         public bool firstCheck;
         public string fullName;

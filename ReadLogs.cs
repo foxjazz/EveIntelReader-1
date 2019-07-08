@@ -32,19 +32,18 @@ namespace IntelReader
             {
                 monitoringFiles.startPath = useSetFolder;
             }
-            Console.Write($"ChatLogs Path: {monitoringFiles.startPath}");
+            Console.WriteLine($"ChatLogs Path: {monitoringFiles.startPath}");
             monitoringFiles.PopulateLogPool();
             //var files = directory.GetFiles()
             //  .Where(file => file.LastWriteTime >= from_date && file.LastWriteTime <= to_date);
             bool doContinue = true;
             int cnter = 0;
             while(doContinue){
-                var key = Console.Read();
-                if(key.ToString() == "q"){
-                    doContinue = false;
-                }
-                monitoringFiles.Off();
-                Thread.Sleep(100);
+                // var key = Console.Read();
+                // if(key.ToString() == "q"){
+                //     doContinue = false;
+                // }
+                Thread.Sleep(1000);
                 cnter++;
                 if (cnter > 50)
                 {
@@ -52,6 +51,7 @@ namespace IntelReader
                     cnter = 0;
                 }
             }
+             monitoringFiles.Off();
             //Initial read, then next read.
           
 
