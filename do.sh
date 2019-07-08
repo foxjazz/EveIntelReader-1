@@ -11,7 +11,7 @@
 
 
  rm EveAlert.zip
-7z a -t7z \EveAlert.zip "G:\EveAlerts\EveIntelReader\bin\Release\netcoreapp3.0\publish"
+7z a -tZip \EveAlert.zip "G:\EveAlerts\EveIntelReader\bin\Release\netcoreapp3.0\publish"
 # git commit -m "updated"
 # git push origin master
 dotnet run .\bin\Release\netcoreapp3.0\EveIntelReader.dll
