@@ -18,7 +18,7 @@ chatFolder, "C:\Users\YourUserName\Documents\EVE\logs"
 Chat logs are auto searched for currently. If no in correct folder, please use the config.
 
 Now open code, then open the folder the project is cloned at.
-From command line type  dotnet build
+From command line type "dotnet build"
 you will see the output built and folder.
 Then type "dotnet run" "The folderapp.dll" 
 i.e. dotnet run G:\EveAlerts\EveIntelReader\bin\Debug\netcoreapp3.0\EveIntelReader.dll
