@@ -48,6 +48,9 @@ namespace IntelReader
                 }
               
             }
+            
+            dir = new DirectoryInfo(startPath);
+            threadMonitor = true;
             ThreadPool.QueueUserWorkItem(StartMonitor);
         }
         public void Off(){
@@ -65,7 +68,7 @@ namespace IntelReader
         private void StartMonitor(Object stateInfo){
             foreach (var fi in monitorFiles)
             {
-                Console.WriteLine($"Monitoring: {fi.prefix}");
+                Console.WriteLine($"Monitoring: {fi.fullName}");
             }
 
             while(threadMonitor){
