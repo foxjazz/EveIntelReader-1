@@ -16,8 +16,6 @@ Config:
 Open config.txt and place the eve logs Folder in there:
 chatFolder, "C:\Users\YourUserName\Documents\EVE\logs"
 
-If someone wants to modify to find and serach for eve chatlogs then please help.
-
 Now open code, then open the folder the project is cloned at.
 From command line type  dotnet build
 you will see the output built and folder.
