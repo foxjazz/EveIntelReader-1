@@ -15,9 +15,11 @@ namespace IntelReader
         {
             var fn = fc.FoundFile;
                 var fs = new FileStream(fn, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                fs.Seek(fc.Length, 0);
                 using (StreamReader sr = new StreamReader(fs))
                 {
-                    Skip(sr, Convert.ToInt32(fc.Lines));
+                    
+                    //Skip(sr, Convert.ToInt32(fc.Lines));
                     while (sr.Peek() >= 0)
                     {
                         string line = sr.ReadLine().CleanString();

@@ -7,11 +7,11 @@ namespace IntelReader
     {
         public string FoundFile { get; }
         public string Prefix {get;}
-        public long Lines { get; }
-        public FileChanged(string fileName, long lines, string prefix)
+        public long Length { get; }
+        public FileChanged(string fileName, long length, string prefix)
         {
             FoundFile = fileName;
-            Lines = lines;
+            Length = length;
             Prefix = prefix;
 
         }

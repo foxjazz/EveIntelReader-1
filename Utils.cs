@@ -74,11 +74,21 @@ namespace IntelReader
             return false;
 
         }
-        public static long ReadLineCount(this StreamReader stream)
+        /* public static long ReadLineCount(this StreamReader stream)
         {
             long cnt = 0;
             while (stream.ReadLine() != null) cnt++;
             return cnt;
+        } */
+        public static Int32 GetYMD(this DateTime dt){
+            string year = DateTime.Now.Year.ToString();
+            string month = DateTime.Now.Month.ToString();
+            if(month.Length == 1)
+                month = "0" + month;
+            string day = DateTime.Now.Day.ToString();
+            if(day.Length == 1)
+                day = "0" + day;
+            return Convert.ToInt32(year + month + day);
         }
     }
 }
