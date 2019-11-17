@@ -31,6 +31,12 @@ namespace IntelReader
             threadMonitor = true;
             ThreadPool.QueueUserWorkItem(StartMonitor);
         }
+
+        public void UpdateLogPool()
+        {
+            var directory = new DirectoryInfo(startPath);
+            UpdateDataFiles(directory.GetFiles());
+        }
         public void Off(){
             threadMonitor = false;
         }
@@ -78,6 +84,7 @@ namespace IntelReader
 
                         if(lfi.lastWrite < DateTime.UtcNow.AddDays(-1)){
                             monitorFiles.Remove(lfi);
+                            UpdateLogPool();
                         }
                     }
                     

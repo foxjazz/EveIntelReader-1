@@ -50,6 +50,7 @@ namespace IntelReader
                     monitoringFiles.CheckChangedLogPool();
                     cnter = 0;
                 }
+
             }
              monitoringFiles.Off();
             //Initial read, then next read.
