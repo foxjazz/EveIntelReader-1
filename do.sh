@@ -10,8 +10,8 @@
  cp ./config/*.txt ./bin/Release/netcoreapp3.0/config
 
 
- rm EveAlert.zip
-7z a -tZip \EveAlert.zip "G:\EveAlerts\EveIntelReader\bin\Release\netcoreapp3.0\publish"
+ rm d:\EveAlerts\EveAlert.zip
+7z a -tZip d:\EveAlerts\EveAlert.zip "D:\EveAlerts\EveIntelReaderPublished\*"
 # git commit -m "updated"
 # git push origin master
-dotnet run .\bin\Release\netcoreapp3.0\EveIntelReader.dll
+# dotnet run .\bin\Release\netcoreapp3.0\EveIntelReader.dll
