@@ -55,6 +55,7 @@ namespace IntelReader
                 Console.WriteLine($"Monitoring: {fi.fullName}");
             }
 
+            DateTime dtkeep = DateTime.Now;
             while(threadMonitor){
                 Thread.Sleep(500);
                 foreach(var di in dir.GetFiles()){
@@ -87,8 +88,17 @@ namespace IntelReader
                             UpdateLogPool();
                         }
                     }
+
                     
                 }
+
+                if (DateTime.Now.AddMinutes(-5) > dtkeep)
+                {
+                    dtkeep = DateTime.Now;
+                    UpdateLogPool();
+                }
+                
+                
             }
         }
         private string GetPath(string fn)    {

@@ -5,15 +5,17 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using RatEaseW;
 
 namespace IntelReader
 {
     public static class Check
     {
+        public static DiscordSend ds;
         public static void checkSystems(string d, string fn, string prefix)
         {
             string fn1 = fn;
-            bool hasNamed;
+            bool hasNamed = false;
             if(fn1.Contains("intel"))
             {
                 fn1 = "";
@@ -21,10 +23,13 @@ namespace IntelReader
 
             var jd = setup.jumpData;
             string log = d.ToUpper();
-            foreach(var jn in jd.jumpNumber)
+            if (ds == null)
+                ds = new DiscordSend();
+            foreach (var jn in jd.jumpNumber)
             {
                 if(jn.system == log)
                 {
+                    ds.SendMessage(d);
                     hasNamed = false;
                     foreach(string fsys in setup.named){
                         if(fsys == jn.system){
@@ -38,7 +43,7 @@ namespace IntelReader
                     Debug.WriteLine($"CL: {prefix} : {jn.system} ");
                 }
             }
-
+          
             // special alert sounds if neut appears in special systems
             foreach (var jn in jd.special)
             {
@@ -46,6 +51,7 @@ namespace IntelReader
                 {
                     PlaySound.playAlert(jn.jumps);
                     Console.WriteLine($"CL: {prefix} : {jn.system} which is {jn.jumps} away.");
+                    ds.SendMessage(d);
                 }
             }
         }

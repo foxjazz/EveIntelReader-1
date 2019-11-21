@@ -1,20 +1,25 @@
 
 using System;
 using System.IO;
+using RatEaseW;
 
 namespace IntelReader
 {
     public static class PlaySound
     {
+
+
         
-
-
         public static void playAlert(string n)
         {
 
             
             if (n == "0")
                 return;
+
+            
+
+            
             Console.Write($"playing: with param: {n}");
             string OSV = System.Environment.OSVersion.ToString();
             string fn = "";

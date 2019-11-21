@@ -10,10 +10,12 @@ namespace IntelReader
     {
         public static JumpData jumpData;
         public static string[] named;
-        public static string[] logNames;
+        public static string discordHook;
+        
         public static void ImportData(string[] args)
 
         {
+            populateNotificationData();
             using (StreamReader sr = new StreamReader(@"config\config.txt"))
             {
                 for (int i = 0; i < 3; i++)
@@ -112,6 +114,33 @@ namespace IntelReader
             if (data[0] == "LogFiles")
                 config.logFileNames = data;
 
+        }
+        private static void populateNotificationData()
+        {
+            var d = Directory.GetCurrentDirectory();
+            if (File.Exists($@"{d}\config\discord.txt"))
+            {
+                StreamReader sr = new StreamReader(@"config\Discord.txt");
+                while (true)
+                {
+                    var read = sr.ReadLine();
+                    if (read == null)
+                        break;
+                    string[] strarray = read.Split(',');
+                    switch (strarray[0])
+                    {
+                        case "webhook":
+                            discordHook = strarray[1];
+                            break;
+                    }
+                }
+                sr.Dispose();
+
+            }
+           
+
+
+           
         }
 
     }
