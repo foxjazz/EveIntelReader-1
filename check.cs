@@ -12,8 +12,9 @@ namespace IntelReader
     public static class Check
     {
         public static DiscordSend ds;
-        public static void checkSystems(string d, string fn, string prefix)
+        public static void checkSystems(string d, string fn, string prefix, string line2)
         {
+            string line = $"CL: {prefix} :: {line2}";
             string fn1 = fn;
             bool hasNamed = false;
             if(fn1.Contains("intel"))
@@ -29,7 +30,7 @@ namespace IntelReader
             {
                 if(jn.system == log)
                 {
-                    ds.SendMessage(d);
+                    ds.SendMessage(line);
                     hasNamed = false;
                     foreach(string fsys in setup.named){
                         if(fsys == jn.system){
@@ -51,7 +52,7 @@ namespace IntelReader
                 {
                     PlaySound.playAlert(jn.jumps);
                     Console.WriteLine($"CL: {prefix} : {jn.system} which is {jn.jumps} away.");
-                    ds.SendMessage(d);
+                    ds.SendMessage(line);
                 }
             }
         }

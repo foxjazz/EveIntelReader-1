@@ -38,7 +38,7 @@ namespace IntelReader
                                 IEnumerable<string> data6 = data.Where(a => a.Length == 6);
                                 foreach (string d in data6)
                                 {
-                                        Check.checkSystems(d, fn, fc.Prefix);
+                                        Check.checkSystems(d, fn, fc.Prefix, line);
                                 }
                             }
 

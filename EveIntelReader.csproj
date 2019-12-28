@@ -6,9 +6,17 @@
     <ApplicationIcon>EveIntel2.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+    <OutputPath>bin\debug2\</OutputPath>
+  </PropertyGroup>
+
 
   <ItemGroup>
     <None Update="config\config.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="config\Discord.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="db\data.csv">

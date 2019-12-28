@@ -26,10 +26,17 @@ namespace RatEaseW
 
         public void SendMessage(string system)
         {
-            var nvc = new NameValueCollection();
-            nvc.Add("username", "Intel");
-            nvc.Add("content", $"Reported by EveIntel {system}");
-            wc.UploadValues(_hook, nvc);
+            try
+            {
+                var nvc = new NameValueCollection();
+                nvc.Add("username", "Intel");
+                nvc.Add("content", $"Reported by EveIntel {system}");
+                wc.UploadValues(_hook, nvc);
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.Message);
+            }
         }
        
 
