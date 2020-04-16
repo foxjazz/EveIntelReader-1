@@ -28,7 +28,7 @@ namespace IntelReader
                             bool clr = false;
                             foreach (string d in data)
                             {
-                                if(d.ToLower() == "clr" || d.ToLower() == "clear" || d.ToLower() == "status")
+                                if(d.ToLower() == "clr" || d.ToLower() == "clear" || d.ToLower() == "status" || d == "0")
                                 {
                                     clr = true;
                                 }
