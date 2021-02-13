@@ -118,11 +118,19 @@ namespace IntelReader
         private Int32 GetFileDate(string fn)
         {
             int f, dot;
-            dot = fn.LastIndexOf("_");
-            f = fn.Substring(0,dot).LastIndexOf("_");
-            f++;
-            string rstring = fn.Substring(f, dot - f);
-            return Convert.ToInt32(rstring);
+            //dot = fn.LastIndexOf("_");
+            var d = fn.Split('_');
+            string sf;
+            if (d.Length > 0)
+                sf = d[1];
+            else
+            {
+                return 0;
+            }
+            // f = fn.Substring(0,dot).LastIndexOf("_");
+            // f++;
+            // string rstring = fn.Substring(f, dot - f);
+            return Convert.ToInt32(sf) + 1;
         }
         private string GetFilePrefix(string fq)
         {

@@ -1,3 +1,3 @@
-chatFolder, "C:\Users\joe\Documents\EVE\logs"
+chatFolder, "C:\Users\joe\Documents\EVE\logs\chatlogs"
 targetSystem, "75C-WN"
-LogFiles, Intel, U42, Immensea, Test
+LogFiles, Intel

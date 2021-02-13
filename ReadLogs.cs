@@ -30,6 +30,9 @@ namespace IntelReader
                 monitoringFiles.startPath = eveRoot;
             else
             {
+                
+            }
+            {
                 monitoringFiles.startPath = useSetFolder;
             }
             Console.WriteLine($"ChatLogs Path: {monitoringFiles.startPath}");
@@ -45,7 +48,7 @@ namespace IntelReader
                 // }
                 Thread.Sleep(1000);
                 cnter++;
-                if (cnter > 50)
+                if (cnter > 30)
                 {
                     monitoringFiles.CheckChangedLogPool();
                     cnter = 0;
