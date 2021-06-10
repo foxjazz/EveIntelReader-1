@@ -29,23 +29,29 @@ namespace IntelReader
             jumpData = new JumpData();
             using (StreamReader sr = new StreamReader("db/data.csv"))
             {
+                if (jumpData == null)
+                {
+                    jumpData = new JumpData();
 
-                string[] data = sr.ReadLine().Replace(" ","").Split(',');
+                }
+                if (jumpData.jumpNumber == null)
+                {
+                    jumpData.jumpNumber = new List<JumpNumber>();
+                }
+
+                string[] data;
                 bool onTarget = false;
+                data = sr.ReadLine().Replace(" ","").Split(',');
+                while (data[0] != "target" || data[1].Replace("\"", "") != config.target)
+                {
+                    data = sr.ReadLine().Replace(" ","").Split(',');
+                }
                 if (data[0] == "target" && data[1].Replace("\"", "") == config.target)
                 {
-                    if (jumpData == null)
-                    {
-                        jumpData = new JumpData();
-
-                    }
-                    if (jumpData.jumpNumber == null)
-                    {
-                        jumpData.jumpNumber = new List<JumpNumber>();
-                    }
+                   
                     while (!onTarget)
                     {
-                        data = sr.ReadLine()?.Split(',');
+                        data = sr.ReadLine().Replace(" ","").Split(',');
                         if (data != null && data.Length > 0 && data[0] == "target" || data == null)
                             break;
 
@@ -72,10 +78,8 @@ namespace IntelReader
             using (StreamReader sr = new StreamReader("db/special.csv"))
             {
 
-                string[] data = sr.ReadLine().Split(',');
+                string[] data;
                 bool onTarget = false;
-
-
                 if (jumpData.special == null)
                 {
                     jumpData.special = new List<JumpNumber>();
