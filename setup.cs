@@ -8,6 +8,7 @@ namespace IntelReader
 {
     public static class setup
     {
+        //Latest Jun 12
         public static JumpData jumpData;
         public static string[] named;
         public static string discordHook;
