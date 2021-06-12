@@ -130,7 +130,11 @@ namespace IntelReader
             // f = fn.Substring(0,dot).LastIndexOf("_");
             // f++;
             // string rstring = fn.Substring(f, dot - f);
-            return Convert.ToInt32(sf) + 1;
+            Int32 result;
+            bool pass = int.TryParse(fn,out result);
+            if (!pass)
+                return 0;
+            return result + 1;
         }
         private string GetFilePrefix(string fq)
         {
