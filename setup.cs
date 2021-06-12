@@ -1,6 +1,7 @@
 using IntelReader.models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -17,7 +18,17 @@ namespace IntelReader
 
         {
             populateNotificationData();
-            using (StreamReader sr = new StreamReader(@"config\config.txt"))
+            string basefolder = Environment.CurrentDirectory;
+            string configF = "";
+
+            configF = Path.Combine(basefolder, "config\\config.txt");
+            if (!File.Exists(configF))
+            {
+                Console.WriteLine("config file in config folder must be present.  Please check the Readme");
+            }
+
+            Console.WriteLine("configLocation:" + configF);
+            using (StreamReader sr = new StreamReader(configF))
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -28,7 +39,7 @@ namespace IntelReader
             }
 
             jumpData = new JumpData();
-            using (StreamReader sr = new StreamReader("db/data.csv"))
+            using (StreamReader sr = new StreamReader(Path.Combine(basefolder,   "db/data.csv")))
             {
                 if (jumpData == null)
                 {
@@ -72,41 +83,50 @@ namespace IntelReader
 
             }
 
-            using (StreamReader sr = new StreamReader("db/named.csv"))
+            named = new[] {""};
+            if (File.Exists(Path.Combine(basefolder, "db\\named.csv")))
             {
-                named = sr.ReadLine().Split(',');
-            }
-            using (StreamReader sr = new StreamReader("db/special.csv"))
-            {
-
-                string[] data;
-                bool onTarget = false;
-                if (jumpData.special == null)
+                using (StreamReader sr = new StreamReader("db/named.csv"))
                 {
-                    jumpData.special = new List<JumpNumber>();
+                    named = sr.ReadLine().Split(',');
                 }
-                while (!onTarget)
-                {
-                    data = sr.ReadLine()?.Split(',');
-                    if (data != null && data.Length > 0 && data[0] == "target" || data == null)
-                        break;
+            }
 
-                    var jn = new JumpNumber();
-                    jn.system = data[0].Replace("\"", "");
-                    if (data.Length > 1)
+            if (jumpData.special == null)
+            {
+                jumpData.special = new List<JumpNumber>();
+            }
+            if (File.Exists(Path.Combine(basefolder, "db\\special.csv")))
+            {
+                using (StreamReader sr = new StreamReader(Path.Combine(basefolder, "db\\special.csv")))
+                {
+
+                    string[] data;
+                    bool onTarget = false;
+                    while (!onTarget)
                     {
-                        jn.jumps = data[1];
-                        jumpData.special.Add(jn);
+                        data = sr.ReadLine()?.Split(',');
+                        if (data != null && data.Length > 0 && data[0] == "target" || data == null)
+                            break;
+
+                        var jn = new JumpNumber();
+                        jn.system = data[0].Replace("\"", "");
+                        if (data.Length > 1)
+                        {
+                            jn.jumps = data[1];
+                            jumpData.special.Add(jn);
+                        }
                     }
+
+                    foreach (var jn in jumpData.special)
+                    {
+                        Console.WriteLine($"special: {jn.system} : {jn.jumps}");
+
+                    }
+
                 }
-
-                foreach (var jn in jumpData.special)
-                {
-                    Console.WriteLine($"special: {jn.system} : {jn.jumps}");
-
-                }
-
             }
+
             Console.WriteLine($"target: {config.target}  {DateTime.Now}");
 
         }
