@@ -63,8 +63,10 @@ namespace IntelReader
                         var lfi = monitorFiles.FirstOrDefault(a => a.fullName == di.FullName);
                         lfi.Created = di.CreationTimeUtc;
                         long currentLength;
-                        using ( var fs = new FileStream(lfi.fullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)){
-                            currentLength = fs.Length;
+                        using ( var fs = new FileStream(lfi.fullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                        {
+                            long flCandidate = Utils.GetFileLength(lfi.fullName);
+                            currentLength = flCandidate > fs.Length ? flCandidate : fs.Length;
                         }
                         if(lfi.firstCheck && lfi.length != currentLength){
                             // TODO activate event
@@ -115,7 +117,7 @@ namespace IntelReader
             string rstring = fn.Substring(f, dot - f);
             return Convert.ToInt32(rstring);
         }
-        private Int32 GetFileDate(string fn)
+        private long GetFileDate(string fn)
         {
             int f, dot;
             //dot = fn.LastIndexOf("_");
@@ -130,11 +132,11 @@ namespace IntelReader
             // f = fn.Substring(0,dot).LastIndexOf("_");
             // f++;
             // string rstring = fn.Substring(f, dot - f);
-            Int32 result;
-            bool pass = int.TryParse(fn,out result);
+            long day;
+            bool pass = long.TryParse(sf + d[2],out day);
             if (!pass)
                 return 0;
-            return result + 1;
+            return day + 1000000;
         }
         private string GetFilePrefix(string fq)
         {
@@ -150,7 +152,7 @@ namespace IntelReader
         private void UpdateDataFiles(FileInfo[] datafiles){
             var candidatFiles = new List<LogFileInfo>();
             
-            var dateInt = DateTime.Now.GetYMD();
+            var dateInt = DateTime.Now.GetYMDT();
             dateInt -= 2;
             foreach (var fi in datafiles)
                     {

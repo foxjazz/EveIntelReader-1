@@ -2,9 +2,11 @@
 using IntelReader.models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Linq;
+using Renci.SshNet;
 
 
 namespace IntelReader
@@ -80,7 +82,7 @@ namespace IntelReader
             while (stream.ReadLine() != null) cnt++;
             return cnt;
         } */
-        public static Int32 GetYMD(this DateTime dt){
+        /*public static Int32 GetYMD(this DateTime dt){
             string year = DateTime.Now.Year.ToString();
             string month = DateTime.Now.Month.ToString();
             if(month.Length == 1)
@@ -89,6 +91,20 @@ namespace IntelReader
             if(day.Length == 1)
                 day = "0" + day;
             return Convert.ToInt32(year + month + day);
+        }
+        */
+
+        public static long GetYMDT(this DateTime dt)
+        {
+            string d = DateTime.Now.ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture);
+            return  Convert.ToInt64(d);
+        }
+        public static long GetFileLength(string fn)
+        {
+            FileInfo fi = new FileInfo(fn);
+            return fi.Length;
+            
+
         }
     }
 }
